@@ -5,7 +5,7 @@
 
 
 # 
-# c1. Előfordult-e olyan, hogy a róka legalább háromkilós libát lopott?
+# 
 # c2. Előfordult-e olyan, hogy a róka kisebb libát hozott, mint az előző napon?
 # d. Hányadik napon sikerült a rókának először legalább háromkilós libát lopnia?
 # e. Melyik a róka első legalább háromkilós libája?
@@ -20,10 +20,12 @@ def beolvasas():
             l.append(int(sor.strip()))
     return l
 
-def kiir(l,r_kilo,r_a):
+def kiir(l,r_kilo,r_a,r_13s,r_le_s):
     print(f"A libák súlyai: {l}")
     print(f"{r_kilo} kiló libát ehet meg a róka? ")
-    print(f"Átlagosan {r_a} kilósak a rókának maradt libák?")
+    print(f"Átlagossan {r_a} kilósak a rókának maradt libák?")
+    print(f"{r_13s} olyan, hogy a róka legalább háromkilós libát lopott?")
+    print(f"{r_le_s}")
     
     
 def osszegzes(l):
@@ -33,13 +35,32 @@ def osszegzes(l):
             osszeg+=l
     return
             
-def megszamolas(l,r_db):
+def megszamolas(l,):
     db=0
     for suly in l:
         if suly<=3:
             db+=1
     return db
 
+def eldontes1(l):
+    van=False
+    i = 0
+    while i<len(l) and not l[i]>=3:
+        i+=1
+        if i<len(l):
+            van=True
+    return van
+
+def eldontes2(l):
+    i=len(l)-1
+    len(l)-1
+    while i>0 and not (l[i]>l[i-1]):
+        i-=1
+    if i<len(l):
+        van=True
+    else:
+        van=False
+    return van
 #Főprogram
 #input
 libak=beolvasas()
@@ -49,5 +70,14 @@ r_megehet_ossz_kg=osszegzes(libak)
 #b. Átlagosan hány kilósak a rókának maradt libák?
 r_megehet_db=megszamolas(libak)
 r_atlag=r_megehet_ossz_kg/r_megehet_db
+#c1. Előfordult-e olyan, hogy a róka legalább háromkilós libát lopott?
+r_legalabb_3_e=eldontes1(libak)
+if r_legalabb_3_e:
+    r_legalabb_3_e_string="Előfordult"
+else:
+    r_legalabb_3_e_string="nem fordult elő"
+
+#c2
+r_lopott_kisebb_libat_elozo_nap=eldontes2(libak)
 #output
-kiir(libak,r_megehet_ossz_kg,r_atlag)
+kiir(libak,r_megehet_ossz_kg,r_atlag,)
